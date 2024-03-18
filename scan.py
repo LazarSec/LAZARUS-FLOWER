@@ -133,13 +133,4 @@ def monitor_ddos(interface="eth0", duration=60, ip_target=None, web_target=None)
 def main():
     while True:
         print(generate_menu())
-        choice = input("Pilih opsi: ")
-
-        if choice == '1':
-            monitor_ddos()
-        elif choice == '2':
-            target_ip = input("Masukkan target IP: ")
-            monitor_ddos(ip_target=target_ip)
-        elif choice == '3':
-            target_web = input("Masukkan target port web: ")
-            monitor_ddos(web_target
+        choice = input("Pilih opsi
