@@ -107,8 +107,8 @@ def monitor_ddos(interface="eth0", duration=60, ip_target=None, web_target=None)
         scapy.sniff(iface=interface, prn=packet_callback, timeout=duration)
 
         # Menampilkan grafik jumlah paket per detik
-        time = np.arange(0, len(packet_count))
-        plt.plot(time, packet_count)
+        time_values = np.arange(0, len(packet_count))
+        plt.plot(time_values, packet_count)
         plt.xlabel('Time (seconds)')
         plt.ylabel('Number of packets')
         plt.title('DDoS Attack Monitoring')
@@ -121,4 +121,25 @@ def monitor_ddos(interface="eth0", duration=60, ip_target=None, web_target=None)
             display_table(ip_scan_result)
 
         # Membuat dan menampilkan tabel pemindaian port web jika target port web ditentukan
-        if web_target
+        if web_target:
+            web_scan_result = scan_web(web_target)
+            print("\n=== Web Scan Result ===")
+            display_table(web_scan_result)
+
+    except Exception as e:
+        print(f"Terjadi kesalahan saat memantau DDoS: {e}")
+
+# Fungsi utama
+def main():
+    while True:
+        print(generate_menu())
+        choice = input("Pilih opsi: ")
+
+        if choice == '1':
+            monitor_ddos()
+        elif choice == '2':
+            target_ip = input("Masukkan target IP: ")
+            monitor_ddos(ip_target=target_ip)
+        elif choice == '3':
+            target_web = input("Masukkan target port web: ")
+            monitor_ddos(web_target
